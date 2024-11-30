@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error inesperado</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-image: url('Error.png'); /* Reemplaza con la ruta de tu imagen */
+            background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+            background-position: center; /* Centra la imagen */
+            cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
+        }
+    </style>
+</head>
+<body onclick="window.location.href='https://www.google.com';">
+<script>
+    (function() {
+        let spacePressedCount = 0;
+        let lastKeyTime = 0;
+
+        document.addEventListener('keydown', function(event) {
+            const currentTime = new Date().getTime();
+            if (event.code === 'Space') {
+                if (currentTime - lastKeyTime <= 500) { // Tiempo máximo entre dos espacios (0.5 segundos)
+                    spacePressedCount++;
+                } else {
+                    spacePressedCount = 1;
+                }
+                if (spacePressedCount === 2) {
+                    window.location.href = "https://makecode.microbit.org/S47839-62259-05281-84936";
+                }
+            } else {
+                spacePressedCount = 0;
+            }
+            lastKeyTime = currentTime;
+        });
+    })();
+</script>
+
+</body>
+</html>

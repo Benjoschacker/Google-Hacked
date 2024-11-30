@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Curioso pero programas?</title>
+    <!-- Cargar la fuente de Google -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-image: url('proyecto/Inicio.png'); /* Imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .log {
+            position: absolute;
+            top: 20%;
+            left: -300px;
+            width: 500px;
+            height: 60%;
+            overflow-y: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: none; /* Inicialmente oculto */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 85%;
+            left: -250px;
+            background-color: #4CAF50; /* Verde */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            display: none; /* Inicialmente oculto */
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Curioso pero ¿programas?</h2>
+        <div class="log" id="kLmw09pT"></div>
+        
+        <!-- Botón para volver a la página anterior -->
+        <button class="back-button" id="PZm32BlT" onclick="window.location.href='index.html'">Volver</button>
+    </div>
+
+    <script>
+        // Generar secuencia alfanumérica aleatoria
+        const secuencia = atob("Nzg1Ng=="); // "7856" en base64
+
+        let entrada = "";
+        document.addEventListener('keydown', function(e) {
+            entrada += e.key;
+            if (entrada === secuencia) {
+                mostrarElementos(); // Mostrar Microbit y botón al ingresar correctamente
+            } else if (secuencia.indexOf(entrada) !== 0) {
+                entrada = ""; // Reiniciar si la entrada es incorrecta
+            }
+        });
+
+        // Función para mostrar Microbit y botón
+        function mostrarElementos() {
+            document.getElementById("kLmw09pT").style.display = "block";
+            document.getElementById("PZm32BlT").style.display = "block";
+            mostrarMicrobit();
+        }
+
+        // Función para mostrar Microbit de textos
+        function mostrarMicrobit() {
+            const logDiv = document.getElementById("kLmw09pT");
+            const Microbit = localStorage.getItem("Microbit") ? JSON.parse(localStorage.getItem("Microbit")) : [];
+            
+            logDiv.innerHTML = ""; // Limpiar contenido
+            Microbit.forEach(item => {
+                const p = document.createElement("p");
+                p.textContent = item;
+                logDiv.appendChild(p);
+            });
+        }
+    </script>
+<script>
+    (function() {
+        let spacePressedCount = 0;
+        let lastKeyTime = 0;
+
+        document.addEventListener('keydown', function(event) {
+            const currentTime = new Date().getTime();
+            if (event.code === 'Space') {
+                if (currentTime - lastKeyTime <= 500) { // Tiempo máximo entre dos espacios (0.5 segundos)
+                    spacePressedCount++;
+                } else {
+                    spacePressedCount = 1;
+                }
+                if (spacePressedCount === 2) {
+                    window.location.href = "https://makecode.microbit.org/S47839-62259-05281-84936";
+                }
+            } else {
+                spacePressedCount = 0;
+            }
+            lastKeyTime = currentTime;
+        });
+    })();
+</script>
+
+</body>
+</html>
